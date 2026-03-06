@@ -18,15 +18,15 @@ function createMap(){
     });
 
     //add OSM base tilelayer
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
     }).addTo(map);
 
     //call the getData function
     getData(map);
 };
 
-//Import GeoJSON data
+//import the GeoJSON data
 function getData(map){
     //load the data
     fetch("data/states_cleaned_final.geojson")
@@ -232,7 +232,7 @@ function createSequenceControls(attributes){
 
 //function to resize the proportional symbols according to the yearly carbon emissions
 function updatePropSymbols(attribute){
-    
+
     //go through map layesr
     map.eachLayer(function(layer){
         if (layer.feature && layer.feature.properties[attribute]){
@@ -266,7 +266,7 @@ function createLegend(attributes){
             //add the title for the legend - orignally tracked the year but took it out as I felt it was repetative (rip 30 mins)
             container.insertAdjacentHTML('beforeend', '<p class="legendTitle">CO<sub>2</sub> Emissions Scale</p>');
 
-            //Step 1: start attribute legend svg string
+            //start the attribute legend svg string
             var svg = '<svg id="attribute-legend" width="220px" height="130px">';
 
             //array of representative values for legend protrinal symbol sizes (originally used min/max/mean but it looked quite gross so I chose
